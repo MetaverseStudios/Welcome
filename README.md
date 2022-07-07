@@ -1,5 +1,5 @@
 # Welcome
-Welcome to Metaverse Studios GitHub.
+Welcome to Metaverse Studios GitHub. Fund/Class LGR2
 
 Metaverse Studios 
 1901 Avenue of the Stars 
