@@ -6,5 +6,5 @@ Metaverse Studios
 Los Angeles, CA 90067
 /by appointment only 
 
-Blockchain/ Stellar Network 
+Blockchain/ Stellar Network.
 Trading symbol: MVRS
