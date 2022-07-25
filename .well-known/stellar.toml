@@ -1,1 +1,75 @@
+VERSION="2.0.0"
 
+NETWORK_PASSPHRASE="Public Global Stellar Network ; September 2015"
+
+FEDERATION_SERVER="https://api.stellar.com/federation"
+
+TRANSFER_SERVER="https://api.stellar.com"
+
+SIGNING_KEY="GB7JR22TCIKGK6434ZBEZ3QQSUS5YLL7ALH7NIVRQQAW4RWJQBSXCJ4Q"
+
+HORIZON_URL="https://horizon.stellar.com"
+
+ACCOUNTS=[
+
+"GB7JR22TCIKGK6434ZBEZ3QQSUS5YLL7ALH7NIVRQQAW4RWJQBSXCJ4Q"]
+
+[DOCUMENTATION]
+
+ORG_NAME="Metaverse Studios"
+
+ORG_URL="https://welcome-adh.pages.dev"
+
+ORG_LOGO="https://welcome-adh.pages.dev/logo.jpg"
+
+ORG_DESCRIPTION="Metaverse Studios"
+
+ORG_PHYSICAL_ADDRESS="1901 Avenue of the Stars, Los Angeles, CA 90067, United States"
+
+ORG_PHYSICAL_ADDRESS_ATTESTATION=""
+
+ORG_PHONE_NUMBER="+1 1234567890"
+
+ORG_PHONE_NUMBER_ATTESTATION=""
+
+ORG_KEYBASE=""
+
+ORG_TWITTER=""
+
+ORG_GITHUB=""
+
+ORG_OFFICIAL_EMAIL=""
+
+[[PRINCIPALS]]
+
+name="Metaverse Studios"
+
+email=""
+
+keybase=""
+
+twitter=""
+
+github=""
+
+id_photo_hash=""
+
+verification_photo_hash=""
+
+[[CURRENCIES]]
+
+code="MVRS"
+
+issuer="GAKH6DXMK45TF7C6ZDJAFHARVRLW4GJIQHC64GX24IUBL4UJ3J7EFDRK"
+
+display_decimals=4
+
+name="Metaverse Studios"
+
+desc="Fungible utility token"
+
+conditions="Active burn policy. Issuer may mint additional tokens"
+
+image="https://welcome-adh.pages.dev/logo.jpg"
+
+fixed_number=false
