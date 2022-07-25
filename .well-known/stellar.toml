@@ -8,7 +8,7 @@ TRANSFER_SERVER="https://api.stellar.org/auth"
 
 SIGNING_KEY="GB7JR22TCIKGK6434ZBEZ3QQSUS5YLL7ALH7NIVRQQAW4RWJQBSXCJ4Q"
 
-HORIZON_URL="https://horizon.stellar.com"
+HORIZON_URL="https://horizon.stellar.org"
 
 ACCOUNTS=[
 
