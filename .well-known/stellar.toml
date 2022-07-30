@@ -28,7 +28,7 @@ ORG_PHYSICAL_ADDRESS="1901 Avenue of the Stars, Los Angeles, CA 90067, United St
 
 ORG_PHYSICAL_ADDRESS_ATTESTATION=""
 
-ORG_PHONE_NUMBER="+1 1234567890"
+ORG_PHONE_NUMBER=""
 
 ORG_PHONE_NUMBER_ATTESTATION=""
 
@@ -66,10 +66,10 @@ display_decimals=4
 
 name="Metaverse Studios"
 
-desc="Fungible utility token"
+desc="Fungible base/counter cryptocurrency, 10+ international trading pairs. Protocol 18 implemented."
 
 conditions="Active burn policy. Issuer may mint additional tokens"
 
 image="https://welcome-adh.pages.dev/logo.jpg"
 
-fixed_number=false
+fixed_number="1000000"
