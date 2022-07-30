@@ -1,0 +1,151 @@
+<html>
+
+    <head>
+        <title>A-Frame Starter Kit - Mini Solar System</title>
+        <meta name="description" content="Build your own planetarium with A-frame">
+        <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+        <script src="https://unpkg.com/aframe-star-system-component@1.0.0/index.js"></script>
+        <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script>
+
+        <!-- Custom shaders for cool textures -->
+        <script src="https://star-shader.glitch.me/js/star-shader.js"></script>
+        <script src="https://gas-giant-shader.glitch.me/js/gas-giant-shader.js"></script>
+        <script src="https://rocky-planet-shader.glitch.me/js/rocky-planet-shader.js"></script>
+        <script src="https://gradient-planet-shader.glitch.me/js/gradient-planet-shader.js"></script>
+        <script src="https://metallic-planet-shader.glitch.me/js/metallic-planet-shader.js"></script>
+        <script src="https://terra-shader.glitch.me/js/terra-shader.js"></script>
+
+        <script>
+
+            // we'll add custom components we can add to our buttons to make
+            // them into controls that pause and restart the rotation
+            AFRAME.registerComponent('pause-button', {
+                init: function () {
+                    let sceneEl = document.querySelector('a-scene');
+                    let el = this.el; // el = our button
+
+                    el.addEventListener('click', function () {
+
+                        // check your browser console to see this message when
+                        // the button is clicked, this is a good way to test
+                        // things
+                        console.log("pause button was clicked!");
+
+                        // this targets all the entities with the .orbits class
+                        sceneEl.querySelectorAll('.orbits').forEach((function (element) {
+                            element.emit('pauseOrbit')
+                        }));
+                    });
+
+                }
+            });
+
+        </script>
+
+        <!-- this includes our restart-button component from the restart-button
+        file -->
+        <script src="/restart-button.js"></script>
+
+
+    </head>
+
+    <body>
+        <a-scene>
+
+            <a-mixin id="rotation" animation="property: rotation; loop: true; from:  0 0 0; to: 0 360 0; dur: 20000; easing: linear;"></a-mixin>
+            <a-mixin id="orbit" animation="property: rotation; loop: true; to: 0 360 0; dur: 40000; easing: linear; pauseEvents: pauseOrbit; resumeEvents: startOrbit"></a-mixin>
+
+            <!-- adding a cursor for look controls-->
+
+            <a-entity position="-5 0 20">
+                <a-camera camera>
+                    <a-cursor material="color: #ff40ff;"></a-cursor>
+                </a-camera>
+            </a-entity>
+
+            <!-- adding start and stop buttons-->
+            <a-entity pause-button position="0 7 0" geometry="primitive: plane; width: 10; height: auto" material="color: #580B95;"
+                text="zOffset: .005; wrapCount: 25; align: center; value: \n pause 
+              \n ">
+            </a-entity>
+
+            <a-entity restart-button position="0 -7 0" geometry="primitive: plane; width: 10; height: auto" material="color: #4628EB;"
+                text="zOffset: .005; wrapCount: 25; align: center; value: \n restart 
+              \n ">
+            </a-entity>
+
+
+            <a-sky color="black"></a-sky>
+            <a-entity star-system="count: 100; radius: 500; depth: 2; texture: https://cdn.glitch.com/d558c128-2ed0-4284-a0da-4d18b9163ad6%2Fstar.svg?1541105053938;"></a-entity>
+
+            <!-- our star gets the star-shader so it can generate a new type of
+            star every time we refresh. Adding handle-events here lets us use
+            our new custom component so when we look at the star it will pause
+            the orbits, and clicking on it will resume them-->
+
+            <a-sphere id="star" position="0 0 0" radius="4" mixin="rotation" star-shader handle-events></a-sphere>
+
+
+            <!-- some planets made with shaders, a gas giant and a metallic
+            planet-->
+            <!-- also give the orbits the same class, orbits, so we can control
+            them with javascipt -->
+            <a-entity id="orbit-gas-giant" mixin="orbit" animation="dur: 90000;" class="orbits">
+                <a-sphere id="gas-giant" position="0 0 30" radius="2.5" mixin="rotation" gas-giant-shader></a-sphere>
+            </a-entity>
+
+            <a-entity id="orbit-metallic" mixin="orbit" class="orbits">
+                <a-sphere id="metallic-planet" position="0 0 15" radius="1" metallic-planet-shader="volcanism: 0;"
+                    mixin="rotation"></a-sphere>
+            </a-entity>
+
+            <a-entity id="orbit-terra" mixin="orbit" class="orbits">
+                <a-sphere id="terra" position="0 0 21" radius="1.75" terra-shader mixin="rotation"></a-sphere>
+            </a-entity>
+
+            <!--here is a rocky planet with a 2 moons -->
+            <a-entity id="orbit-rocky" mixin="orbit" animation="dur: 30000;" class="orbits">
+                <a-entity id="rocky-and-moon" position="0 0 10.5">
+                    <a-entity id="rocky-container">
+                        <a-sphere position="0 0 0" radius=".75" id="rocky-planet" mixin="rotation"
+                            gradient-planet-shader="texture: https://cdn.glitch.com/d558c128-2ed0-4284-a0da-4d18b9163ad6%2FGeneric_Celestia_asteroid_texture.jpg?1541189998715"></a-sphere>
+                        <a-entity id="moon-container" mixin="orbit">
+                            <a-sphere position="-1 0 0 0" radius=".1" id="moon1" gradient-planet-shader="texture: https://cdn.glitch.com/d558c128-2ed0-4284-a0da-4d18b9163ad6%2FGeneric_Celestia_asteroid_texture.jpg?1541189998715"></a-sphere>
+                        </a-entity>
+                        <a-entity id="moon2-container" mixin="orbit" animation="dur: 30000;" class="orbits">
+                            <a-sphere position="-2 0 0 0" radius=".2" id="moon2" gradient-planet-shader="texture: https://cdn.glitch.com/d558c128-2ed0-4284-a0da-4d18b9163ad6%2FGeneric_Celestia_asteroid_texture.jpg?1541189998715"></a-sphere>
+                        </a-entity>
+                    </a-entity>
+                </a-entity>
+            </a-entity>
+
+            <!-- An icy planet with two rings-->
+            <a-entity id="orbit-icy" mixin="orbit" class="orbits">
+                <a-entity id="icy-container" position="0 0 40">
+                    <a-sphere radius="1.8" id="icy" rocky-planet-shader="icy: 1;" mixin="rotation"></a-sphere>
+                    <a-entity id="icy-ring-1" geometry="primitive: torus; radius: 3.2; radiusTubular: 0.1;segmentsTubular: 50"
+                        material="color: #aec2cc;" rotation="-10 90 0" scale="1 1 0.1"></a-entity>
+                    <a-entity id="saturn-ring-2" geometry="primitive: torus; radius: 2.4; radiusTubular: 0.2;segmentsTubular: 50"
+                        material="color: #dbefed;" rotation="-10 90 0" scale="1 1 0.1"></a-entity>
+                </a-entity>
+            </a-entity>
+
+            <!-- An volcano planet with a ring -->
+            <a-entity id="orbit-volcano" mixin="orbit" animation="dur: 70000;" class="orbits">
+                <a-entity id="volcano-container" position="0 0 6">
+                    <a-sphere id="volcano-planet" radius=".75" metallic-planet-shader="volcanism: 1;" mixin="rotation"></a-sphere>
+                    <a-entity id="volcano-ring" geometry="primitive: torus; radius: 1.7; radiusTubular: 0.01;segmentsTubular: 50"
+                        material="color: #EE3A15;" rotation="90 0 0" scale="1 1 0.1"></a-entity>
+                </a-entity>
+            </a-entity>
+
+        </a-scene>
+
+
+        <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+        <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+        <script src="https://button.glitch.me/button.js"></script>
+    </body>
+
+</html>
